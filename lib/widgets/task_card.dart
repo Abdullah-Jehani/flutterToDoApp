@@ -3,9 +3,11 @@ import 'package:flutter_application_1/models/Task_Model.dart';
 import 'package:flutter_application_1/screens/detailed_task_screen.dart';
 
 class TaskCard extends StatefulWidget {
-  const TaskCard({super.key, required this.taskModel});
+  const TaskCard(
+      {super.key, required this.taskModel, required this.changeState});
 
   final TaskModel taskModel;
+  final Function changeState;
   @override
   State<TaskCard> createState() => _TaskCardState();
 }
@@ -34,10 +36,7 @@ class _TaskCardState extends State<TaskCard> {
               value: widget.taskModel.isDone,
               onChanged: (a) {
                 setState(() {
-                  widget.taskModel.isDone = !widget.taskModel.isDone;
-
-                  // waitingTasks.add(completedTasks[index]);
-                  // completedTasks.remove(completedTasks[index]);
+                  widget.changeState();
                 });
               }),
         ),

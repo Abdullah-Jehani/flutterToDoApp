@@ -51,7 +51,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(24),
                     itemCount: waitingTasks.length,
                     itemBuilder: (context, index) {
-                      return TaskCard(taskModel: waitingTasks[index]);
+                      return TaskCard(
+                        taskModel: waitingTasks[index],
+                        changeState: () {
+                          setState(() {
+                            waitingTasks[index].isDone =
+                                !waitingTasks[index].isDone;
+                            completedTasks.add(waitingTasks[index]);
+                            waitingTasks.remove(waitingTasks[index]);
+                          });
+                        },
+                      );
                     },
                   ),
                   ListView.builder(
@@ -59,6 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         return TaskCard(
                           taskModel: completedTasks[index],
+                          changeState: () {
+                            setState(() {
+                              completedTasks[index].isDone =
+                                  !completedTasks[index].isDone;
+                              waitingTasks.add(completedTasks[index]);
+                              completedTasks.remove(completedTasks[index]);
+                            });
+                          },
                         );
                       }),
                 ],
