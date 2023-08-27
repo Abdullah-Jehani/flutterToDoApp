@@ -26,6 +26,7 @@ class _TaskCardState extends State<TaskCard> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
         child: ListTile(
+          leading: const Icon(Icons.task_alt_sharp),
           title: Text(
             widget.taskModel.name,
             style: const TextStyle(color: Colors.black),
